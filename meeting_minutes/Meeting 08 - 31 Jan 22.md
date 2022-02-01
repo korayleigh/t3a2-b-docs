@@ -1,4 +1,4 @@
-# Meeting 7 - 31 Jan 22
+# Meeting 8 - 31 Jan 22
 
 ## 1. Progress Update
 
@@ -17,13 +17,13 @@
 
 - In line with best practice, we plan to do the first deployment of both back-end and front end  as soon as both apps are set up.
 
-## 3. Next Steps
+## 4. Next Steps
 
 - Koray will scaffold the front-end react app and start to build different pages linked by a router.
 - Leigh will scaffold the back-end rails app, add models and relationships, routes, controllers.
 - Deployment of both when a working app is ready.
 
-## 4. Progress Target
+## 5. Progress Target
 
 - Agreed that given the project time of 14 days, we should attempt to have the MVP completed well in advance of the due date.
 - Specific target of a working, unstyled MVP by Friday 4th February 2022
@@ -31,5 +31,5 @@
 - Also ample time for styling
 - Continuous deployment will ensure no last minute crises on last day of project.
 
-## 3. Blockers
+## 6. Blockers
 - None
