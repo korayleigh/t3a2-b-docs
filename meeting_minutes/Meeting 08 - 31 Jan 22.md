@@ -32,4 +32,5 @@
 - Continuous deployment will ensure no last minute crises on last day of project.
 
 ## 6. Blockers
+
 - None

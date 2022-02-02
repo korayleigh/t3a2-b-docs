@@ -18,5 +18,6 @@
 - Leigh will continue with the rails initial database and models setup
 - Once initial setup is complete, we will be able to determine further tasks and plan to divide between us so that we both get to work on front-end and back-end apps, continuing our branching code review source code methodology from part A.
 
-## 3. Blockers
+## 4. Blockers
+
 - None
