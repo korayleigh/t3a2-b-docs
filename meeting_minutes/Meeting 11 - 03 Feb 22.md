@@ -20,7 +20,7 @@
 - Discussed method for handling the menu in app state.
 - Agreed that the entire menu be downloaded at app load, which will mean that all subsequent menu manipulation (search/filter) is instant, as it will not involve any server requests.
 - Agreed to implement a pre-flight check of the order at checkout stage in case any menu item is no longer available or detail has become stale.
- 
+
 ## 3. Task Management and Planning
 
 - Original target to have all MVP features complete by end of Friday may not happen
@@ -35,7 +35,7 @@
 - Not enough is understood about how to test rails controllers and models
 - Need to research conventions on file locations and naming, and syntax for interacting with Rails objects.
 - Agreed to seek advice from Jarrod.
-- 
+
 ### 4.2. Linting Errors
 
 - In order to prevent pull requests on the backend repository failing linting checks, rubocop linting commands should be run locally before push.
