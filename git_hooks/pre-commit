@@ -59,17 +59,23 @@ fi
 # Added by Leigh 20220203
 
 # Security audit dependencies
+echo "======================="
 echo "Running bundle-audit..."
+echo "======================="
 bundle exec bundle-audit --update
 BUNDLE_AUDIT_EXIT_CODE=$?
 
 # Security audit application code
+echo "==================="
 echo "Running brakeman..."
+echo "==================="
 bundle exec brakeman -q -w2
 BRAKEMAN_EXIT_CODE=$?
 
 # Lint Ruby files
+echo "=================="
 echo "Running rubocop..."
+echo "=================="
 bundle exec rubocop --parallel
 RUBOCOP_EXIT_CODE=$?
 
@@ -90,7 +96,15 @@ then
   fi
 fi
 
-if [ $GIT_DIFF_EXIT_CODE -ne 0 ] || [ $BUNDLE_AUDIT_EXIT_CODE -ne 0 ] || [ $BRAKEMAN_EXIT_CODE -ne 0 ] || [ $RUBOCOP_EXIT_CODE -ne 0 ]
+# Rspec testing
+echo "================"
+echo "Running rspec..."
+echo "================"
+bundle exec rails db:drop db:create db:schema:load RAILS_ENV=test
+bundle exec rspec
+RSPEC_EXIT_CODE=$?
+
+if [ $GIT_DIFF_EXIT_CODE -ne 0 ] || [ $BUNDLE_AUDIT_EXIT_CODE -ne 0 ] || [ $BRAKEMAN_EXIT_CODE -ne 0 ] || [ $RUBOCOP_EXIT_CODE -ne 0 ] || [ $RSPEC_EXIT_CODE -ne 0 ]
 then
   echo "Errors found, refusing to commit"
   exit 1
