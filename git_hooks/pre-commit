@@ -79,23 +79,6 @@ echo "=================="
 bundle exec rubocop --parallel
 RUBOCOP_EXIT_CODE=$?
 
-if [ $RUBOCOP_EXIT_CODE -ne 0 ]
-then
-  echo "Rubocop errors found, attempting to autocorrect" 
-  bundle exec rubocop --parallel -a
-  bundle exec rubocop --only Style/FrozenStringLiteralComment -A
-  bundle exec rubocop --only Layout/EmptyLineAfterMagicComment -A
-  bundle exec rubocop --parallel
-  RUBOCOP_EXIT_CODE=$?
-
-  if [ $RUBOCOP_EXIT_CODE -ne 0 ]
-  then
-    echo "Couldn't autocorrect errors, please investigate and fix manually"
-  else
-    echo "Rubocop errors autocorrected"
-  fi
-fi
-
 # Rspec testing
 echo "================"
 echo "Running rspec..."
@@ -107,6 +90,25 @@ RSPEC_EXIT_CODE=$?
 if [ $GIT_DIFF_EXIT_CODE -ne 0 ] || [ $BUNDLE_AUDIT_EXIT_CODE -ne 0 ] || [ $BRAKEMAN_EXIT_CODE -ne 0 ] || [ $RUBOCOP_EXIT_CODE -ne 0 ] || [ $RSPEC_EXIT_CODE -ne 0 ]
 then
   echo "Errors found, refusing to commit"
+
+  if [ $RUBOCOP_EXIT_CODE -ne 0 ]
+  then
+    echo "Rubocop errors found, attempting to autocorrect" 
+    bundle exec rubocop --parallel -a
+    bundle exec rubocop --only Style/FrozenStringLiteralComment -A
+    bundle exec rubocop --only Layout/EmptyLineAfterMagicComment -A
+    bundle exec rubocop --parallel
+    RUBOCOP_EXIT_CODE=$?
+
+    if [ $RUBOCOP_EXIT_CODE -ne 0 ]
+    then
+      echo "Couldn't autocorrect errors, please investigate and fix manually"
+    else
+      echo "Rubocop errors autocorrected"
+      echo "Run git add to re-add the corrected files"
+      echo "Then git commit to re-attempt"
+    fi
+  fi
   exit 1
 else
   echo "Pre-commit checks passed, continuing with commit"
